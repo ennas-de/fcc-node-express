@@ -2,9 +2,23 @@ const express = require("express");
 
 const app = express();
 
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", (req, res) => res.send("Hello Abdulhakeem"));
+app.get("/", (req, res) => {
+  if (process.env.MESSAGE_STYLE === "uppercase") {
+    return res.json({
+      message: "HELLO JSON",
+    });
+  } else {
+    return res.json({
+      message: "Hello json",
+    });
+  }
+});
 
 app.get("/json", (req, res) => {
   res.json({
